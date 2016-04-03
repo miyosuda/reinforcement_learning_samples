@@ -1,8 +1,19 @@
 package reinforcement.dp_grid;
 
+/**
+ *  G=Goal
+ * 
+ *   G + + + +
+ *   + + + + +
+ *   + + + + +
+ *   + + + + G
+ *   
+ *   At every step, agent will receive -1 reward.
+ */
 public class World {
-	public static final int WIDTH = 4;
-	public static final int HEIGHT = 4;
+	private static final int WIDTH = 4;
+	private static final int HEIGHT = 4;
+	private static final int STEP_SIZE = 1000;
 
 	private Cell cells[][] = new Cell[WIDTH][HEIGHT];
 
@@ -15,12 +26,10 @@ public class World {
 
 		cells[0][0].setEnd();
 		cells[3][3].setEnd();
-
-		process();
 	}
 
-	private void process() {
-		for (int i = 0; i < 1000; ++i) {
+	public void process() {
+		for (int i = 0; i < STEP_SIZE; ++i) {
 			step();
 		}
 	}
@@ -31,6 +40,9 @@ public class World {
 		return cells[x][y];
 	}
 
+	/**
+	 * update staate value with Dynamic Programming method.
+	 */
 	private void step() {
 		float newVs[][] = new float[WIDTH][HEIGHT];
 		
@@ -41,11 +53,12 @@ public class World {
 					continue;
 				}
 
-				Cell cellUp = getCell(i, j - 1);
-				Cell cellDown = getCell(i, j + 1);
+				Cell cellUp    = getCell(i, j - 1);
+				Cell cellDown  = getCell(i, j + 1);
 				Cell cellRight = getCell(i + 1, j);
-				Cell cellLeft = getCell(i - 1, j);
+				Cell cellLeft  = getCell(i - 1, j);
 				
+				// Equiprobable random policy
 				float newV = 
 						0.25f * (-1.0f + cellUp.v) +
 						0.25f * (-1.0f + cellDown.v) +
