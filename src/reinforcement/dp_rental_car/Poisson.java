@@ -20,28 +20,15 @@ public class Poisson {
 		}
 	}
 
-	public double getRequestRate(int usingCarSize, int availableCarSize) {
-		if (usingCarSize >= availableCarSize) {
+	public double getRate(int carSize, int availableSize) {
+		if (carSize >= availableSize) {
 			double sum = 0.0f;
-			for (int i = 0; i < usingCarSize; ++i) {
+			for (int i = 0; i < carSize; ++i) {
 				sum += rates[i];
 			}
 			return 1.0 - sum;
 		} else {
-			return rates[usingCarSize];
-		}
-	}
-	
-	// TODO: 結局上と同じになっているので、統一すること.
-	public double getReturnRate(int returningCarSize, int remainingSlotSize) {
-		if (returningCarSize >= remainingSlotSize) {
-			double sum = 0.0f;
-			for (int i = 0; i < returningCarSize; ++i) {
-				sum += rates[i];
-			}
-			return 1.0 - sum;
-		} else {
-			return rates[returningCarSize];
+			return rates[carSize];
 		}
 	}
 }
