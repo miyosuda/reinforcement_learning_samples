@@ -1,5 +1,10 @@
 package reinforcement.dp_rental_car;
 
+/**
+ * Dynamic programming sample for Jack's Car rental service.
+ * 
+ * @see https://webdocs.cs.ualberta.ca/~sutton/book/ebook/node43.html
+ */
 public class Main {
 	public static final int MOVING_CAR_MAX = 5;
 	public static final int CAR_NUM_MAX = 20;
