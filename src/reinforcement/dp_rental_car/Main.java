@@ -12,8 +12,8 @@ public class Main {
 	private static final double DELTA_VALUE_THRESHOLD = 1.0;
 	private static final int COST_PER_MOVE = 2;
 	private static final int REWARD_PER_CUSTOMER = 10;
-	private static final double REQUEST_LAMBDA_A = 3.0;
-	private static final double REQUEST_LAMBDA_B = 4.0;
+	private static final double CUSTOMER_LAMBDA_A = 3.0;
+	private static final double CUSTOMER_LAMBDA_B = 4.0;
 	private static final double RETURN_LAMBDA_A = 3.0;
 	private static final double RETURN_LAMBDA_B = 2.0;
 
@@ -34,9 +34,9 @@ public class Main {
 		main.dumpValue();
 	}
 
-	private Poisson poissionRequestA = new Poisson(REQUEST_LAMBDA_A, CAR_NUM_MAX + 1);
+	private Poisson poissionRequestA = new Poisson(CUSTOMER_LAMBDA_A, CAR_NUM_MAX + 1);
 	private Poisson poissionReturnA = new Poisson(RETURN_LAMBDA_A, CAR_NUM_MAX + 1);
-	private Poisson poissionRequestB = new Poisson(REQUEST_LAMBDA_B, CAR_NUM_MAX + 1);
+	private Poisson poissionRequestB = new Poisson(CUSTOMER_LAMBDA_B, CAR_NUM_MAX + 1);
 	private Poisson poissionReturnB = new Poisson(RETURN_LAMBDA_B, CAR_NUM_MAX + 1);
 
 	private Main() {
