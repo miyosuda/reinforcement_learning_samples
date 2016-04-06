@@ -1,5 +1,8 @@
 package reinforcement.mc_blackjack;
 
+/**
+ * Calculate average return of states.
+ */
 public class Returns {
 	// [playerSum][dealerCard][usableAce]
 	private int[][][] rewardSums = new int[State.PLAYER_SUM_SIZE][State.DEALER_CARD_SIZE][2];

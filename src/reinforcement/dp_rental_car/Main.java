@@ -34,9 +34,9 @@ public class Main {
 		main.dumpValue();
 	}
 
-	private Poisson poissionRequestA = new Poisson(CUSTOMER_LAMBDA_A, CAR_NUM_MAX + 1);
+	private Poisson poissionCustomerA = new Poisson(CUSTOMER_LAMBDA_A, CAR_NUM_MAX + 1);
 	private Poisson poissionReturnA = new Poisson(RETURN_LAMBDA_A, CAR_NUM_MAX + 1);
-	private Poisson poissionRequestB = new Poisson(CUSTOMER_LAMBDA_B, CAR_NUM_MAX + 1);
+	private Poisson poissionCustomerB = new Poisson(CUSTOMER_LAMBDA_B, CAR_NUM_MAX + 1);
 	private Poisson poissionReturnB = new Poisson(RETURN_LAMBDA_B, CAR_NUM_MAX + 1);
 
 	private Main() {
@@ -60,7 +60,7 @@ public class Main {
 
 		for (int customerA = 0; customerA <= afterCarA; ++customerA) {
 			// customerA -> customer num at A
-			double rateCustomerA = poissionRequestA.getRate(customerA, afterCarA);
+			double rateCustomerA = poissionCustomerA.getRate(customerA, afterCarA);
 			// slotA -> remaining slot size at A
 			int slotA = CAR_NUM_MAX - (afterCarA - customerA);
 
@@ -70,7 +70,7 @@ public class Main {
 
 				for (int customerB = 0; customerB <= afterCarB; ++customerB) {
 					// customerB -> Customer num at B
-					double rateCustomerB = poissionRequestB.getRate(customerB, afterCarB);
+					double rateCustomerB = poissionCustomerB.getRate(customerB, afterCarB);
 
 					int slotB = CAR_NUM_MAX - (afterCarB - customerB);
 					// slotB -> Remaining slot size at B

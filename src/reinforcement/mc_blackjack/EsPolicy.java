@@ -10,7 +10,7 @@ public class EsPolicy implements Policy {
 	private Random random = new Random();
 
 	public EsPolicy() {
-		// 初期ポリシーとして、プレイヤのカード合計が20以上なら、ヒットする
+		// As an initial policy, player hits if the player sum is below 20.
 		for (int playerSum = 12; playerSum <= 21; playerSum++) {
 			for (int dealerCard = 1; dealerCard <= 10; dealerCard++) {
 				boolean hit = playerSum < 20;
@@ -18,9 +18,9 @@ public class EsPolicy implements Policy {
 				int playerSumIndex = getPlayerSumIndex(playerSum);
 				int dealerCardIndex = getDealerCardIndex(dealerCard);
 
-				// UsableAce有り
+				// Has usable ace.
 				policy[playerSumIndex][dealerCardIndex][1] = hit;
-				// UsableAce無し
+				// Doesn't have usable ace.
 				policy[playerSumIndex][dealerCardIndex][0] = hit;
 			}
 		}

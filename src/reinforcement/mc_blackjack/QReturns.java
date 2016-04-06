@@ -1,6 +1,9 @@
 package reinforcement.mc_blackjack;
 
 
+/**
+ * Calcurate average return of State-Action pairs.
+ */
 public class QReturns {
 	// [playerSum][dealerCard][usableAce][action]
 	private int[][][][] rewardSums = new int[State.PLAYER_SUM_SIZE][State.DEALER_CARD_SIZE][2][2];

@@ -37,11 +37,11 @@ public class MonteCarlo {
 
 	public void process() {
 		execute();
-		System.out.println("Useable Ace");
+		System.out.println("Usable Ace");
 		System.out.println(getPlotString(true));
 		
 		System.out.println("");		
-		System.out.println("No Useable Ace");
+		System.out.println("No Usable Ace");
 		System.out.println(getPlotString(false));
 	}
 }

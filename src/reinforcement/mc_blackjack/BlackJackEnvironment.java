@@ -43,16 +43,16 @@ public class BlackJackEnvironment {
 		boolean firstStep = true;
 
 		while (true) {
-			// Even when player has 21 at the first time,
-			// policy will decide hit or stick.
-
 			while (getPlayerSum() < 12) {
 				// If player's sum is below 12, draw cards without decision.
 				draw(playerCards);
 				continue;
 			}
 
-			if (doesLearnerHit(firstStep)) {
+			// Even when player has 21 at the first time,
+			// policy will decide hit or stick.
+
+			if (doesPlayerHit(firstStep)) {
 				// When player decide to hit (draw card).
 
 				// Store current state-action pair.
@@ -70,7 +70,7 @@ public class BlackJackEnvironment {
 
 			} else {
 				// When player decide to stick. (not drawing card)
-				// Store current state-action pair.				
+				// Store current state-action pair.
 				playHistory.add(new PlayHistoryEntry(getCurrentState(), false));
 				break;
 			}
@@ -119,63 +119,64 @@ public class BlackJackEnvironment {
 		cards.add(card);
 	}
 
-	private int countCards(ArrayList<Integer> cards) {
-		// card num of non-ace
-		int nonAceNum = 0;
-		// card num of ace
+	private int getCardSum(ArrayList<Integer> cards) {
+		// Sum of non-ace card		
+		int nonAceSum = 0;
+		// Card num of ace
 		int aceNum = 0;
 
 		for (int card : cards) {
 			if (card == 1) {
 				aceNum++;
 			} else {
-				nonAceNum += card;
+				nonAceSum += card;
 			}
 		}
 		if (aceNum > 0) {
 			// If player has more than one ace
-			if (nonAceNum + 11 + (aceNum - 1) <= 21) {
-				// If one ace is treated as 11 and the sum doesn't be greater than 21.
-				nonAceNum += 11 + (aceNum - 1);
+			if (nonAceSum + 11 + (aceNum - 1) <= 21) {
+				// If one ace is treated as 11 and the sum doesn't be greater
+				// than 21.
+				nonAceSum += 11 + (aceNum - 1);
 			} else {
 				// If it becomes greater than 21, ace is treated as 1.
-				nonAceNum += aceNum;
+				nonAceSum += aceNum;
 			}
 		}
-		return nonAceNum;
+		return nonAceSum;
 	}
 
 	private int getPlayerSum() {
-		return countCards(playerCards);
+		return getCardSum(playerCards);
 	}
 
 	private int getDealerSum() {
-		return countCards(dealerCards);
+		return getCardSum(dealerCards);
 	}
 
 	private boolean hasUseableAce(ArrayList<Integer> cards) {
-		// card num of non-ace		
-		int nonAceNum = 0;
-		// card num of ace
+		// Sum of non-ace card
+		int nonAceSum = 0;
+		// Card num of ace
 		int aceNum = 0;
 
 		for (int card : cards) {
 			if (card == 1) {
 				aceNum++;
 			} else {
-				nonAceNum += card;
+				nonAceSum += card;
 			}
 		}
-		if (aceNum > 0 && nonAceNum + 11 + (aceNum - 1) <= 21) {
-			// If one ace is treated as 11 and the sum doesn't go greater than 21.			
-			// (Then ace can be treated as 11)
+		if (aceNum > 0 && nonAceSum + 11 + (aceNum - 1) <= 21) {
+			// If one ace is treated as 11 and the sum doesn't go greater than
+			// 21. (Then ace can be treated as 11)
 			return true;
 		} else {
 			return false;
 		}
 	}
 
-	private boolean doesLearnerHit(boolean firstStep) {
+	private boolean doesPlayerHit(boolean firstStep) {
 		return policy.doesHit(getCurrentState(), firstStep);
 	}
 
